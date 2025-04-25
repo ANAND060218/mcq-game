@@ -1547,7 +1547,9 @@ const questions = [
                 "week": "Week 11",
                 "multiple": false,
                 "answerOptions": [
-                  { "answerText": "Fence (memory barrier) instructions", "isCorrect": true }
+                  { "answerText": "Fence", "isCorrect": true },
+                  { "answerText": " instructions", "isCorrect": false },
+                  { "answerText": "memory barrier", "isCorrect":false }
                 ]
               },
               {
@@ -1566,7 +1568,9 @@ const questions = [
                 "week": "Week 11",
                 "multiple": false,
                 "answerOptions": [
-                  { "answerText": "BZ", "isCorrect": true }
+                  { "answerText": "BZ", "isCorrect": true },
+                  { "answerText": "Bn", "isCorrect": false },
+                  { "answerText": "bzn", "isCorrect":false }
                 ]
               },
               {
@@ -1574,7 +1578,9 @@ const questions = [
                 "week": "Week 11",
                 "multiple": false,
                 "answerOptions": [
-                  { "answerText": "bnz", "isCorrect": true }
+                  { "answerText": "bnz", "isCorrect": true },
+                  { "answerText": "bn", "isCorrect": false },
+                  { "answerText": "bz", "isCorrect":false }
                 ]
               },
               {
@@ -1668,7 +1674,8 @@ const questions = [
                 "week": "Week 11",
                 "multiple": false,
                 "answerOptions": [
-                  { "answerText": "Weak Ordering", "isCorrect": true }
+                  { "answerText": "Weak Ordering", "isCorrect": true },
+                  { "answerText": "Well Ordering", "isCorrect": false }
                 ]
               },
               {
