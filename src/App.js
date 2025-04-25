@@ -1277,7 +1277,10 @@ const questions = [
             "week": "Week 9",
             "multiple": false,
             "answerOptions": [
-              { "answerText": "8", "isCorrect": true }
+              { "answerText": "16", "isCorrect": false },
+              { "answerText": "8", "isCorrect": true },
+              { "answerText": "12", "isCorrect": false },
+              { "answerText": "6", "isCorrect": false }
             ]
           },
           {
@@ -1317,7 +1320,9 @@ const questions = [
             "week": "Week 9",
             "multiple": false,
             "answerOptions": [
-              { "answerText": "Fresh", "isCorrect": true }
+              { "answerText": "Fresh", "isCorrect": true },
+              { "answerText": "HEAD Fresh", "isCorrect":false },
+              { "answerText": "HEAD", "isCorrect": false }
             ]
           },
           {
@@ -1365,6 +1370,7 @@ const questions = [
             ]
           },
           
+          
             {
               "questionText": "In Sequent NUMA-Q protocol, if the requester state is HEAD_FRESH, which of the following steps should be taken to handle write miss?",
               "week": "Week 10",
@@ -1377,60 +1383,155 @@ const questions = [
               ]
             },
             {
-              "questionText": "In Sequent NUMA-Q protocol, for the state HEAD_GONE, which of the following are TRUE?",
+              "questionText": "While handling a write request, after the purge operation by the Head node, the state of the remaining node in the list is",
+              "week": "Week 10",
+              "multiple": false,
+              "answerOptions": [
+                { "answerText": "HEAD_DIRTY", "isCorrect": false },
+                { "answerText": "ONLY_HEAD", "isCorrect": false },
+                { "answerText": "HEAD_FRESH", "isCorrect": false },
+                { "answerText": "ONLY_DIRTY", "isCorrect": true }
+              ]
+            },
+            {
+              "questionText": "Which among the following is the serialization entity in Sequent NUMA-Q system",
+              "week": "Week 10",
+              "multiple": false,
+              "answerOptions": [
+                { "answerText": "Home node", "isCorrect": true },
+                { "answerText": "Tail node", "isCorrect": false },
+                { "answerText": "Head node", "isCorrect": false },
+                { "answerText": "Owner node", "isCorrect": false }
+              ]
+            },
+            {
+              "questionText": "Consider the following statements and choose the correct option:\n\nS1: Consistency model is known to the software layer\nS2: Coherence is only visible to the software layer",
+              "week": "Week 10",
+              "multiple": false,
+              "answerOptions": [
+                { "answerText": "S1 is true and S2 is false", "isCorrect": true },
+                { "answerText": "S1 is false and S2 is true", "isCorrect": false },
+                { "answerText": "S1 and S2 are false", "isCorrect": false },
+                { "answerText": "S1 and S2 are true", "isCorrect": false }
+              ]
+            },
+            {
+              "questionText": "Is the sequence 1a->2a->2b->1b sequentially consistent?\n\nP1: A = 5, B = 2\nP2: Print B, Print A",
+              "week": "Week 10",
+              "multiple": false,
+              "answerOptions": [
+                { "answerText": "Yes", "isCorrect": true },
+                { "answerText": "No", "isCorrect": false }
+              ]
+            },
+            {
+              "questionText": "Which of the following outcomes is not possible in a sequentially consistent execution of P1 and P2?",
+              "week": "Week 10",
+              "multiple": false,
+              "answerOptions": [
+                { "answerText": "(A,B) = (0,0)", "isCorrect": false },
+                { "answerText": "(A,B) = (0,2)", "isCorrect": true },
+                { "answerText": "(A,B) = (5,2)", "isCorrect": false },
+                { "answerText": "(A,B) = (5,0)", "isCorrect": false }
+              ]
+            },
+            {
+              "questionText": "Which of the following is/are not requirements for Sequential Consistency (SC)?",
               "week": "Week 10",
               "multiple": true,
               "answerOptions": [
-                { "answerText": "This state is terminal", "isCorrect": false },
-                { "answerText": "This node is no longer in the list", "isCorrect": false },
-                { "answerText": "Node can continue to respond to other nodes", "isCorrect": true },
-                { "answerText": "No other node can read from this node", "isCorrect": false }
+                { "answerText": "Write atomicity", "isCorrect": false },
+                { "answerText": "Strict response", "isCorrect": true },
+                { "answerText": "Program order", "isCorrect": false },
+                { "answerText": "Compiler optimizations", "isCorrect": true }
               ]
             },
             {
-              "questionText": "Which of the following is TRUE for the Sequent NUMA-Q protocol?",
+              "questionText": "Memory consistency defines the constraints on the order in which memory operations appear to get executed with respect to one another",
               "week": "Week 10",
               "multiple": false,
               "answerOptions": [
-                { "answerText": "RAC of a quad can only respond to home node", "isCorrect": false },
-                { "answerText": "Directory always maintains all sharers’ information", "isCorrect": false },
-                { "answerText": "Head node manages invalidation of all readers", "isCorrect": true },
-                { "answerText": "Tail node initiates roll-out", "isCorrect": false }
+                { "answerText": "True", "isCorrect": true },
+                { "answerText": "False", "isCorrect": false }
               ]
             },
             {
-              "questionText": "In NUMA-Q, what does RAC stand for?",
+              "questionText": "The relax model used in SPARC V8 TSO is ......",
               "week": "Week 10",
               "multiple": false,
               "answerOptions": [
-                { "answerText": "Remote access controller", "isCorrect": false },
-                { "answerText": "Remote address cache", "isCorrect": true },
-                { "answerText": "Remote address controller", "isCorrect": false },
-                { "answerText": "Remote access cache", "isCorrect": false }
+                { "answerText": "R->W", "isCorrect": false },
+                { "answerText": "W->R", "isCorrect": true },
+                { "answerText": "W->W", "isCorrect": false },
+                { "answerText": "R->R", "isCorrect": false }
               ]
             },
             {
-              "questionText": "Which state in Sequent NUMA-Q indicates that the node is the final reader in the list?",
+              "questionText": "For overlapping writes, the writing process must wait for a write acknowledgment from the memory to satisfy Sequential Consistency",
               "week": "Week 10",
               "multiple": false,
               "answerOptions": [
-                { "answerText": "MID_VALID", "isCorrect": false },
-                { "answerText": "HEAD_DIRTY", "isCorrect": false },
-                { "answerText": "TAIL_VALID", "isCorrect": true },
-                { "answerText": "HEAD_GONE", "isCorrect": false }
+                { "answerText": "True", "isCorrect": true },
+                { "answerText": "False", "isCorrect": false }
               ]
             },
             {
-              "questionText": "In Sequent NUMA-Q, what does the 'roll-out' operation result in?",
+              "questionText": "Which of the following is/are not true for serving the write miss?",
+              "week": "Week 10",
+              "multiple": true,
+              "answerOptions": [
+                { "answerText": "In SCI, load new block and then put old in write buffer", "isCorrect": true },
+                { "answerText": "In SCI, first roll-out, then load new block", "isCorrect": false },
+                { "answerText": "In bus based, roll-out first then load new block", "isCorrect": true },
+                { "answerText": "In bus based, load new block and then put old in write buffer", "isCorrect": false }
+              ]
+            },
+            {
+              "questionText": "In relaxed consistency models, the program order requirement is relaxed using which of the following?",
+              "week": "Week 10",
+              "multiple": true,
+              "answerOptions": [
+                { "answerText": "Relax W->R", "isCorrect": true },
+                { "answerText": "Read own write early", "isCorrect": false },
+                { "answerText": "Relax W->W", "isCorrect": true },
+                { "answerText": "Read others write early", "isCorrect": false }
+              ]
+            },
+            {
+              "questionText": "When the Head node wants to perform a write-back or replacement, which of the following options is/are FALSE?",
+              "week": "Week 10",
+              "multiple": true,
+              "answerOptions": [
+                { "answerText": "Head changes to a pending state", "isCorrect": false },
+                { "answerText": "Head sends messages to downstream nodes", "isCorrect": false },
+                { "answerText": "TAIL_VALID node changes to HEAD_FRESH", "isCorrect": true },
+                { "answerText": "MID_VALID to HEAD_DIRTY", "isCorrect": false }
+              ]
+            },
+            {
+              "questionText": "In NUMA-Q for locally allocated blocks, the ___ at the home node is the serializing entity.",
               "week": "Week 10",
               "multiple": false,
               "answerOptions": [
-                { "answerText": "All readers write their data back", "isCorrect": false },
-                { "answerText": "Head invalidates all readers", "isCorrect": true },
-                { "answerText": "Tail invalidates head", "isCorrect": false },
-                { "answerText": "Directory writes back to memory", "isCorrect": false }
+                { "answerText": "Quad bus", "isCorrect": true },
+                { "answerText": "SCI ring", "isCorrect": false },
+                { "answerText": "OBIC", "isCorrect": false },
+                { "answerText": "RAC", "isCorrect": false }
               ]
             },
+            {
+              "questionText": "In SCI directory protocol, when a block is replaced, it removes itself from the sharing list using the ___ operation.",
+              "week": "Week 10",
+              "multiple": false,
+              "answerOptions": [
+                { "answerText": "Purge", "isCorrect": false },
+                { "answerText": "Roll-out", "isCorrect": true },
+                { "answerText": "Write back", "isCorrect": false },
+                { "answerText": "Replacement", "isCorrect": false }
+              ]
+            },
+          
+          
               {
                 "questionText": "IBM 370 model uses ..... synchronization method",
                 "week": "Week 11",
