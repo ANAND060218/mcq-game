@@ -12,11 +12,13 @@ function QuestionCard({ question, questionNumber, totalQuestions, selectedAnswer
           Question {questionNumber} of {totalQuestions}
         </div>
         <div className="question-topic">
-          <em>Topic: {question.topic}</em>
+          <em>Topic: {question.week}</em>
         </div>
       </div>
       <div className="question-text">
-        {question.questionText}
+        {question.questionText.split('\n').map((line, index) => (
+          <p key={index}>{line}</p>
+        ))}
       </div>
       <div className="answer-section">
         {question.answerOptions.map((option, index) => (

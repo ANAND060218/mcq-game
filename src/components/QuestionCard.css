@@ -63,6 +63,10 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.question-text p {
+  margin: 8px 0;
+  line-height: 1.6;
+}
 
 .answer-button:hover {
   background-color: #00796B;
