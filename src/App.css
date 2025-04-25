@@ -12,7 +12,31 @@
   width: 100%;
   max-width: 600px;
 }
-  
+.question-navigation {
+  margin-bottom: 20px;
+}
+
+.question-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.question-jump button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.question-jump button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
 .navigation-buttons {
   display: flex;
   justify-content: space-between;

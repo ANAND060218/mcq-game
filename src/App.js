@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+
 
 const questions = [
   
@@ -1758,8 +1758,9 @@ const questions = [
     
   
 ];
+
 function App() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(null); // Start with null (no question selected)
   const [answers, setAnswers] = useState(
     questions.map(q => (q.multiple ? [] : null))
   );
@@ -1797,69 +1798,285 @@ function App() {
   const imgSrc = (path) =>
     `${process.env.PUBLIC_URL}${path}`;
 
+  const handleQuestionSelect = (questionNumber) => {
+    setCurrentQuestion(questionNumber - 1); // Convert to 0-based index
+  };
+
   return (
     <div className="app-container">
+      <style>{`
+        * {
+          box-sizing: border-box;
+          font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+          margin: 0;
+          padding: 20px;
+          background-color: #BAF89AFF;
+        }
+        
+        .app-container {
+          max-width: 800px;
+          margin: 0 auto;
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quiz-container, .score-container {
+          padding: 20px;
+        }
+        
+        .question-navigation {
+          margin-bottom: 20px;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #eee;
+          text-align: center;
+        }
+        
+        .question-jump {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 15px;
+          justify-content: center;
+        }
+        
+        .question-jump button {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 1px solid #ddd;
+          background: white;
+          color: black;
+          cursor: pointer;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+        }
+        
+        .question-jump button:hover {
+          background: #FAB6B6FF;
+        }
+        
+        .question-jump button.active {
+          background: #4a6bff;
+          color: white;
+          border-color: #4a6bff;
+          font-weight: bold;
+        }
+        
+        .question-content {
+          margin-top: 20px;
+          border: 1px solid #eee;
+          padding: 20px;
+          border-radius: 8px;
+          background: #f9f9f9;
+        }
+        
+        .question-text {
+          margin-bottom: 20px;
+          font-size: 18px;
+          line-height: 1.5;
+        }
+        
+        .question-image {
+          margin: 15px 0;
+          text-align: center;
+        }
+        
+        .question-image img {
+          max-width: 100%;
+          max-height: 300px;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        form {
+          margin-bottom: 25px;
+        }
+        
+        form label {
+          display: block;
+          margin-bottom: 12px;
+          padding: 10px 15px;
+          background: white;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.2s;
+          border: 1px solid #ddd;
+        }
+        
+        form label:hover {
+          background: #f0f0f0;
+        }
+        
+        form input[type="radio"],
+        form input[type="checkbox"] {
+          margin-right: 10px;
+        }
+        
+        .navigation-buttons {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 20px;
+        }
+        
+        button {
+          padding: 10px 20px;
+          background: #4a6bff;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+          transition: all 0.2s;
+        }
+        
+        button:hover {
+          background: #3a5bef;
+        }
+        
+        button:disabled {
+          background: #cccccc;
+          cursor: not-allowed;
+        }
+        
+        .score-container h2 {
+          color: #4a6bff;
+          text-align: center;
+        }
+        
+        .score-container p {
+          text-align: center;
+          font-size: 24px;
+          margin: 20px 0;
+        }
+        
+        .review-question {
+          margin-bottom: 30px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #eee;
+        }
+        
+        .review-text {
+          margin-bottom: 15px;
+        }
+        
+        .review-question ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        
+        .review-question li {
+          padding: 8px 15px;
+          margin-bottom: 8px;
+          border-radius: 5px;
+          background: #f9f9f9;
+        }
+        
+        .start-message {
+          text-align: center;
+          margin: 40px 0;
+          font-size: 18px;
+          color: #666;
+        }
+      `}</style>
+
       {!showScore ? (
         <div className="quiz-container">
-          <h3>
-            Question {currentQuestion + 1} / {questions.length}
-          </h3>
-
-          <div className="question-text">
-            {questions[currentQuestion].questionText
-              .split('\n')
-              .map((line, i) => (
-                <p key={i}>
-                  <strong>{line}</strong>
-                </p>
+          <div className="question-navigation">
+            <h3>
+              {currentQuestion !== null 
+                ? `Question ${currentQuestion + 1} / ${questions.length}`
+                : 'Select a question to begin'}
+            </h3>
+            <div className="question-jump">
+              {questions.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleQuestionSelect(index + 1)}
+                  className={currentQuestion === index ? "active" : ""}
+                >
+                  {index + 1}
+                </button>
               ))}
-
-            {questions[currentQuestion].img && (
-              <div className="question-image">
-                <img
-                  src={imgSrc(questions[currentQuestion].img)}
-                  alt="Question illustration"
-                  loading="lazy"
-                  style={{ maxWidth: '100%', maxHeight: '300px' }}
-                />
-              </div>
-            )}
+            </div>
           </div>
 
-          <form>
-            {questions[currentQuestion].answerOptions.map((opt, idx) => (
-              <div key={idx}>
-                <label>
-                  <input
-                    type={
-                      questions[currentQuestion].multiple
-                        ? 'checkbox'
-                        : 'radio'
-                    }
-                    name="answer"
-                    value={idx}
-                    checked={
-                      questions[currentQuestion].multiple
-                        ? answers[currentQuestion].includes(idx)
-                        : answers[currentQuestion] === idx
-                    }
-                    onChange={() => handleOptionChange(idx)}
-                  />
-                  {' '}{opt.answerText}
-                </label>
-              </div>
-            ))}
-          </form>
+          {currentQuestion !== null ? (
+            <div className="question-content">
+              <div className="question-text">
+                {questions[currentQuestion].questionText
+                  .split('\n')
+                  .map((line, i) => (
+                    <p key={i}>
+                      <strong>{line}</strong>
+                    </p>
+                  ))}
 
-          <div className="navigation-buttons">
-            <button onClick={() => setCurrentQuestion(q => q - 1)} disabled={currentQuestion === 0}>
-              Prev
-            </button>
-            <button onClick={() => setCurrentQuestion(q => q + 1)} disabled={currentQuestion === questions.length - 1}>
-              Next
-            </button>
-            <button onClick={() => setShowScore(true)}>Submit</button>
-          </div>
+                {questions[currentQuestion].img && (
+                  <div className="question-image">
+                    <img
+                      src={imgSrc(questions[currentQuestion].img)}
+                      alt="Question illustration"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <form>
+                {questions[currentQuestion].answerOptions.map((opt, idx) => (
+                  <div key={idx}>
+                    <label>
+                      <input
+                        type={
+                          questions[currentQuestion].multiple
+                            ? 'checkbox'
+                            : 'radio'
+                        }
+                        name="answer"
+                        value={idx}
+                        checked={
+                          questions[currentQuestion].multiple
+                            ? answers[currentQuestion].includes(idx)
+                            : answers[currentQuestion] === idx
+                        }
+                        onChange={() => handleOptionChange(idx)}
+                      />
+                      {' '}{opt.answerText}
+                    </label>
+                  </div>
+                ))}
+              </form>
+
+              <div className="navigation-buttons">
+                <button 
+                  onClick={() => setCurrentQuestion(q => q - 1)} 
+                  disabled={currentQuestion === 0}
+                >
+                  Prev
+                </button>
+                <button 
+                  onClick={() => setCurrentQuestion(q => q + 1)} 
+                  disabled={currentQuestion === questions.length - 1}
+                >
+                  Next
+                </button>
+                <button onClick={() => setShowScore(true)}>Submit</button>
+              </div>
+            </div>
+          ) : (
+            <div className="start-message">
+              <p>Click on any question number above to begin the quiz</p>
+            </div>
+          )}
         </div>
       ) : (
         <div className="score-container">
@@ -1883,7 +2100,6 @@ function App() {
                       src={imgSrc(q.img)}
                       alt="Question illustration"
                       loading="lazy"
-                      style={{ maxWidth: '100%', maxHeight: '300px' }}
                     />
                   </div>
                 )}
@@ -1902,10 +2118,12 @@ function App() {
                           ? 'green'
                           : selected
                             ? 'red'
-                            : 'black'
+                            : 'black',
+                        fontWeight: opt.isCorrect ? 'bold' : 'normal'
                       }}
                     >
                       {selected ? '✓ ' : ''}{opt.answerText}
+                      {opt.isCorrect && !selected && ' (Correct Answer)'}
                     </li>
                   );
                 })}
