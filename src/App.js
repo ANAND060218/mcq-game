@@ -1758,9 +1758,8 @@ const questions = [
     
   
 ];
-
 function App() {
-  const [currentQuestion, setCurrentQuestion] = useState(null); // Start with null (no question selected)
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState(
     questions.map(q => (q.multiple ? [] : null))
   );
@@ -1833,7 +1832,6 @@ function App() {
           margin-bottom: 20px;
           padding-bottom: 15px;
           border-bottom: 1px solid #eee;
-          text-align: center;
         }
         
         .question-jump {
@@ -1841,7 +1839,6 @@ function App() {
           flex-wrap: wrap;
           gap: 8px;
           margin-top: 15px;
-          justify-content: center;
         }
         
         .question-jump button {
@@ -1850,7 +1847,7 @@ function App() {
           border-radius: 50%;
           border: 1px solid #ddd;
           background: white;
-          color: black;
+          color:black;
           cursor: pointer;
           font-size: 14px;
           display: flex;
@@ -1865,17 +1862,9 @@ function App() {
         
         .question-jump button.active {
           background: #4a6bff;
-          color: white;
+          color: black;
           border-color: #4a6bff;
           font-weight: bold;
-        }
-        
-        .question-content {
-          margin-top: 20px;
-          border: 1px solid #eee;
-          padding: 20px;
-          border-radius: 8px;
-          background: #f9f9f9;
         }
         
         .question-text {
@@ -1904,11 +1893,10 @@ function App() {
           display: block;
           margin-bottom: 12px;
           padding: 10px 15px;
-          background: white;
+          background: #f9f9f9;
           border-radius: 5px;
           cursor: pointer;
           transition: all 0.2s;
-          border: 1px solid #ddd;
         }
         
         form label:hover {
@@ -1979,22 +1967,13 @@ function App() {
           border-radius: 5px;
           background: #f9f9f9;
         }
-        
-        .start-message {
-          text-align: center;
-          margin: 40px 0;
-          font-size: 18px;
-          color: #666;
-        }
       `}</style>
 
       {!showScore ? (
         <div className="quiz-container">
           <div className="question-navigation">
             <h3>
-              {currentQuestion !== null 
-                ? `Question ${currentQuestion + 1} / ${questions.length}`
-                : 'Select a question to begin'}
+              Question {currentQuestion + 1} / {questions.length}
             </h3>
             <div className="question-jump">
               {questions.map((_, index) => (
@@ -2009,74 +1988,66 @@ function App() {
             </div>
           </div>
 
-          {currentQuestion !== null ? (
-            <div className="question-content">
-              <div className="question-text">
-                {questions[currentQuestion].questionText
-                  .split('\n')
-                  .map((line, i) => (
-                    <p key={i}>
-                      <strong>{line}</strong>
-                    </p>
-                  ))}
+          <div className="question-text">
+            {questions[currentQuestion].questionText
+              .split('\n')
+              .map((line, i) => (
+                <p key={i}>
+                  <strong>{line}</strong>
+                </p>
+              ))}
 
-                {questions[currentQuestion].img && (
-                  <div className="question-image">
-                    <img
-                      src={imgSrc(questions[currentQuestion].img)}
-                      alt="Question illustration"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
+            {questions[currentQuestion].img && (
+              <div className="question-image">
+                <img
+                  src={imgSrc(questions[currentQuestion].img)}
+                  alt="Question illustration"
+                  loading="lazy"
+                />
               </div>
+            )}
+          </div>
 
-              <form>
-                {questions[currentQuestion].answerOptions.map((opt, idx) => (
-                  <div key={idx}>
-                    <label>
-                      <input
-                        type={
-                          questions[currentQuestion].multiple
-                            ? 'checkbox'
-                            : 'radio'
-                        }
-                        name="answer"
-                        value={idx}
-                        checked={
-                          questions[currentQuestion].multiple
-                            ? answers[currentQuestion].includes(idx)
-                            : answers[currentQuestion] === idx
-                        }
-                        onChange={() => handleOptionChange(idx)}
-                      />
-                      {' '}{opt.answerText}
-                    </label>
-                  </div>
-                ))}
-              </form>
-
-              <div className="navigation-buttons">
-                <button 
-                  onClick={() => setCurrentQuestion(q => q - 1)} 
-                  disabled={currentQuestion === 0}
-                >
-                  Prev
-                </button>
-                <button 
-                  onClick={() => setCurrentQuestion(q => q + 1)} 
-                  disabled={currentQuestion === questions.length - 1}
-                >
-                  Next
-                </button>
-                <button onClick={() => setShowScore(true)}>Submit</button>
+          <form>
+            {questions[currentQuestion].answerOptions.map((opt, idx) => (
+              <div key={idx}>
+                <label>
+                  <input
+                    type={
+                      questions[currentQuestion].multiple
+                        ? 'checkbox'
+                        : 'radio'
+                    }
+                    name="answer"
+                    value={idx}
+                    checked={
+                      questions[currentQuestion].multiple
+                        ? answers[currentQuestion].includes(idx)
+                        : answers[currentQuestion] === idx
+                    }
+                    onChange={() => handleOptionChange(idx)}
+                  />
+                  {' '}{opt.answerText}
+                </label>
               </div>
-            </div>
-          ) : (
-            <div className="start-message">
-              <p>Click on any question number above to begin the quiz</p>
-            </div>
-          )}
+            ))}
+          </form>
+
+          <div className="navigation-buttons">
+            <button 
+              onClick={() => setCurrentQuestion(q => q - 1)} 
+              disabled={currentQuestion === 0}
+            >
+              Prev
+            </button>
+            <button 
+              onClick={() => setCurrentQuestion(q => q + 1)} 
+              disabled={currentQuestion === questions.length - 1}
+            >
+              Next
+            </button>
+            <button onClick={() => setShowScore(true)}>Submit</button>
+          </div>
         </div>
       ) : (
         <div className="score-container">
