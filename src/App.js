@@ -121,7 +121,7 @@ const questions = [
       ]
     },
     {
-      "questionText": "Table indicates the speed-up achieved by each program on the respective machines over the reference machine ref_1 and ref_2... Using geometric mean, identify which of the following statements is correct?",
+      "questionText": "Table indicates the speed-up achieved by each program on the respective machines over the reference machine ref_1 and ref_2... Using geometric mean, identify which of the following statements is correct?\n\nS1: Machine-2 better than Machine 1 with respect to ref_1 \n\nS2: Machine-1 better than Machine-2 with respect to ref_1 \n\nS3: Machine-2 better than Machine-1 with respect to ref_2 \n\nS4: Machine-1 better than Machine-2 with respect to ref_2",
       "week": "Week 1",
       "img":"/week1.png",
       "multiple": false,
