@@ -273,8 +273,8 @@ const questions = [
       "answerOptions": [
         { "answerText": "I-1, II-2, III-3", "isCorrect": false },
         { "answerText": "I-2, II-1, III-3", "isCorrect": false },
-        { "answerText": "I-3, II-2, III-1", "isCorrect": true },
-        { "answerText": "I-3, II-1, III-2", "isCorrect": false }
+        { "answerText": "I-3, II-2, III-1", "isCorrect": false },
+        { "answerText": "I-3, II-1, III-2", "isCorrect": true }
       ]
     },
     {
