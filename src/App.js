@@ -313,7 +313,8 @@ const questions = [
       "week": "Week 2",
       "multiple": false,
       "answerOptions": [
-        { "answerText": "symmetric Multiprocessing", "isCorrect": true }
+        { "answerText": "symmetric Multiprocessing", "isCorrect": false },
+         { "answerText": "dancing hall", "isCorrect": true }
       ]
     },
     {
