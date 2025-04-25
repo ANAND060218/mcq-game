@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './App.css';
 
 const questions = [
   
@@ -1757,8 +1757,7 @@ const questions = [
       
     
   
-];
-function App() {
+];function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState(
     questions.map(q => (q.multiple ? [] : null))
@@ -1803,172 +1802,6 @@ function App() {
 
   return (
     <div className="app-container">
-      <style>{`
-        * {
-          box-sizing: border-box;
-          font-family: 'Arial', sans-serif;
-        }
-        
-        body {
-          margin: 0;
-          padding: 20px;
-          background-color: #BAF89AFF;
-        }
-        
-        .app-container {
-          max-width: 800px;
-          margin: 0 auto;
-          background: white;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .quiz-container, .score-container {
-          padding: 20px;
-        }
-        
-        .question-navigation {
-          margin-bottom: 20px;
-          padding-bottom: 15px;
-          border-bottom: 1px solid #eee;
-        }
-        
-        .question-jump {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-          margin-top: 15px;
-        }
-        
-        .question-jump button {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          border: 1px solid #ddd;
-          background: white;
-          color:black;
-          cursor: pointer;
-          font-size: 14px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.2s;
-        }
-        
-        .question-jump button:hover {
-          background: #FAB6B6FF;
-        }
-        
-        .question-jump button.active {
-          background: #4a6bff;
-          color: black;
-          border-color: #4a6bff;
-          font-weight: bold;
-        }
-        
-        .question-text {
-          margin-bottom: 20px;
-          font-size: 18px;
-          line-height: 1.5;
-        }
-        
-        .question-image {
-          margin: 15px 0;
-          text-align: center;
-        }
-        
-        .question-image img {
-          max-width: 100%;
-          max-height: 300px;
-          border-radius: 5px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        form {
-          margin-bottom: 25px;
-        }
-        
-        form label {
-          display: block;
-          margin-bottom: 12px;
-          padding: 10px 15px;
-          background: #f9f9f9;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-        
-        form label:hover {
-          background: #f0f0f0;
-        }
-        
-        form input[type="radio"],
-        form input[type="checkbox"] {
-          margin-right: 10px;
-        }
-        
-        .navigation-buttons {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 20px;
-        }
-        
-        button {
-          padding: 10px 20px;
-          background: #4a6bff;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 16px;
-          transition: all 0.2s;
-        }
-        
-        button:hover {
-          background: #3a5bef;
-        }
-        
-        button:disabled {
-          background: #cccccc;
-          cursor: not-allowed;
-        }
-        
-        .score-container h2 {
-          color: #4a6bff;
-          text-align: center;
-        }
-        
-        .score-container p {
-          text-align: center;
-          font-size: 24px;
-          margin: 20px 0;
-        }
-        
-        .review-question {
-          margin-bottom: 30px;
-          padding-bottom: 20px;
-          border-bottom: 1px solid #eee;
-        }
-        
-        .review-text {
-          margin-bottom: 15px;
-        }
-        
-        .review-question ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        
-        .review-question li {
-          padding: 8px 15px;
-          margin-bottom: 8px;
-          border-radius: 5px;
-          background: #f9f9f9;
-        }
-      `}</style>
-
       {!showScore ? (
         <div className="quiz-container">
           <div className="question-navigation">
@@ -2003,6 +1836,7 @@ function App() {
                   src={imgSrc(questions[currentQuestion].img)}
                   alt="Question illustration"
                   loading="lazy"
+                  style={{ maxWidth: '100%', maxHeight: '300px' }}
                 />
               </div>
             )}
@@ -2034,16 +1868,10 @@ function App() {
           </form>
 
           <div className="navigation-buttons">
-            <button 
-              onClick={() => setCurrentQuestion(q => q - 1)} 
-              disabled={currentQuestion === 0}
-            >
+            <button onClick={() => setCurrentQuestion(q => q - 1)} disabled={currentQuestion === 0}>
               Prev
             </button>
-            <button 
-              onClick={() => setCurrentQuestion(q => q + 1)} 
-              disabled={currentQuestion === questions.length - 1}
-            >
+            <button onClick={() => setCurrentQuestion(q => q + 1)} disabled={currentQuestion === questions.length - 1}>
               Next
             </button>
             <button onClick={() => setShowScore(true)}>Submit</button>
@@ -2071,6 +1899,7 @@ function App() {
                       src={imgSrc(q.img)}
                       alt="Question illustration"
                       loading="lazy"
+                      style={{ maxWidth: '100%', maxHeight: '300px' }}
                     />
                   </div>
                 )}
@@ -2089,12 +1918,10 @@ function App() {
                           ? 'green'
                           : selected
                             ? 'red'
-                            : 'black',
-                        fontWeight: opt.isCorrect ? 'bold' : 'normal'
+                            : 'black'
                       }}
                     >
                       {selected ? '✓ ' : ''}{opt.answerText}
-                      {opt.isCorrect && !selected && ' (Correct Answer)'}
                     </li>
                   );
                 })}
