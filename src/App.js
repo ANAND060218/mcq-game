@@ -1531,10 +1531,10 @@ const questions = [
               ]
             },
           
-          
+            
               {
                 "questionText": "IBM 370 model uses ..... synchronization method",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
                   { "answerText": "Compare and swap", "isCorrect": true },
@@ -1544,18 +1544,15 @@ const questions = [
               },
               {
                 "questionText": "When using relaxed consistency models, the programmer can override the relaxations by using ______",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
-                  { "answerText": "Fence", "isCorrect": true },
-                  { "answerText": "Branch", "isCorrect": false },
-                  { "answerText": "Load", "isCorrect": false },
-                  { "answerText": "Compare", "isCorrect": false }
+                  { "answerText": "Fence (memory barrier) instructions", "isCorrect": true }
                 ]
               },
               {
                 "questionText": "Which among the following are models used for relaxing all program orders",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": true,
                 "answerOptions": [
                   { "answerText": "Weak-ordering", "isCorrect": true },
@@ -1565,30 +1562,24 @@ const questions = [
                 ]
               },
               {
-                "questionText": "TRY: LD R1, lockvar ..... R2, TRY ST R2, lockvar // R1 = 0 UNLOCK: ST R0, lockvar // R0 = 1 — Write the missing instruction in the above code",
-                "week": "Week 11",
+                "questionText": "TRY: LD R1, lockvar ..... R2, TRY ST R2, lockvar // R1 = 0 UNLOCK: ST R0, lockvar // R0 = 1. Write the missing instruction in the above code",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
-                  { "answerText": "BZ", "isCorrect": true },
-                  { "answerText": "BNZ", "isCorrect": false },
-                  { "answerText": "BEQZ", "isCorrect": false },
-                  { "answerText": "NOP", "isCorrect": false }
+                  { "answerText": "BZ", "isCorrect": true }
                 ]
               },
               {
                 "questionText": "A test and set operation is implemented in the following code snippet. Write the missing instruction: LOCK: T&S R0, lockvar ........ R0, LOCK RETURN UNLOCK: ST lockvar, #0 RETURN",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
-                  { "answerText": "bnz", "isCorrect": true },
-                  { "answerText": "bz", "isCorrect": false },
-                  { "answerText": "jmp", "isCorrect": false },
-                  { "answerText": "nop", "isCorrect": false }
+                  { "answerText": "bnz", "isCorrect": true }
                 ]
               },
               {
                 "questionText": "A “Swap” instruction atomically exchanges values of lockvar with a register, where lockvar is a synchronization variable.",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
                   { "answerText": "True", "isCorrect": true },
@@ -1596,8 +1587,8 @@ const questions = [
                 ]
               },
               {
-                "questionText": "Which of the following statements are correct: S1: RC and PowerPC reads others’ write early S2: WO relaxes only R->W and not other dependences",
-                "week": "Week 11",
+                "questionText": "Which of the following statements are correct:\nS1: RC and PowerPC reads others’ write early\nS2: WO relaxes only R->W and not other dependences",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
                   { "answerText": "S1 is true S2 is false", "isCorrect": true },
@@ -1607,8 +1598,8 @@ const questions = [
                 ]
               },
               {
-                "questionText": "To perform atomic exchange in a cache coherent system, we ____ on a local cached copy and if the lock is ___ then perform ___ .",
-                "week": "Week 11",
+                "questionText": "To perform atomic exchange in a cache coherent system, we ____ on a local cached copy and if the lock is ___ then perform ___ . Choose the correct option to fill the given blanks.",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
                   { "answerText": "Read, free, exchange", "isCorrect": true },
@@ -1618,19 +1609,19 @@ const questions = [
                 ]
               },
               {
-                "questionText": "Which of the following statements are true for LL-SC: S1: Instructions between LL and SC are not guaranteed to execute atomically; S2: Instructions between LL and SC cannot get interleaved with other processes instructions",
-                "week": "Week 11",
+                "questionText": "Which of the following statements are true for LL-SC:\nS1: Instructions between LL and SC are not guaranteed to execute atomically\nS2: Instructions between LL and SC cannot get interleaved with other processes instructions",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
                   { "answerText": "Only S1 is true", "isCorrect": true },
                   { "answerText": "Only S2 is true", "isCorrect": false },
-                  { "answerText": "Both S1 and S2 are true", "isCorrect": false },
-                  { "answerText": "Both S1 and S2 are false", "isCorrect": false }
+                  { "answerText": "Both S1 and S2 are false", "isCorrect": false },
+                  { "answerText": "Both S1 and S2 are true", "isCorrect": false }
                 ]
               },
               {
-                "questionText": "The following code snippet implements “Atomic Swap” between [R1] and R2 using LL-SC. Select the correct options to fill the blank instructions: TRY: MOV R3, R2 ..... R4, O(R1) ..... R3, O(R1) BEQZ R3, TRY ......... R2,R4",
-                "week": "Week 11",
+                "questionText": "The following code snippet implements “Atomic Swap” between [R1] and R2 using LL-SC. Select the correct options to fill the blank instructions.",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
                   { "answerText": "LL, SC, MOV", "isCorrect": true },
@@ -1640,19 +1631,20 @@ const questions = [
                 ]
               },
               {
-                "questionText": "Which of the following is/are not an uninterruptible instruction used for synchronization?",
-                "week": "Week 11",
+                "questionText": "Which of the following is/are not an uninterruptible instruction used for synchronization",
+                "week": "Week 10",
                 "multiple": true,
                 "answerOptions": [
                   { "answerText": "Test & set", "isCorrect": false },
                   { "answerText": "LL-SC", "isCorrect": false },
                   { "answerText": "Compare and swap", "isCorrect": true },
+                  { "answerText": "Fetch & increment", "isCorrect": false },
                   { "answerText": "Execute Load instruction. After it finishes, execute the Store instruction", "isCorrect": true }
                 ]
               },
               {
                 "questionText": "Which of the following models permits to read others’ write early?",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": true,
                 "answerOptions": [
                   { "answerText": "IBM 370", "isCorrect": false },
@@ -1664,7 +1656,7 @@ const questions = [
               },
               {
                 "questionText": "During synchronisation, the LL-SC pair of instructions uses a simple (i.e. standard) store instruction. Is this statement true/false?",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
                   { "answerText": "True", "isCorrect": false },
@@ -1673,26 +1665,25 @@ const questions = [
               },
               {
                 "questionText": "WO stands for ...................",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": false,
                 "answerOptions": [
-                  { "answerText": "Weak Ordering", "isCorrect": true },
-                  { "answerText": "Write Once", "isCorrect": false },
-                  { "answerText": "Wait Operation", "isCorrect": false },
-                  { "answerText": "Write Ordering", "isCorrect": false }
+                  { "answerText": "Weak Ordering", "isCorrect": true }
                 ]
               },
               {
                 "questionText": "Which of the following is NOT TRUE for Barrier Synchronisation?",
-                "week": "Week 11",
+                "week": "Week 10",
                 "multiple": true,
                 "answerOptions": [
+                  { "answerText": "If count==P, then it means all processes have arrived at the barrier", "isCorrect": false },
                   { "answerText": "The first process reaching barrier releases the busy-wait of others", "isCorrect": true },
                   { "answerText": "If count > P then busy wait on a flag variable", "isCorrect": true },
-                  { "answerText": "If count == P, then it means all processes have arrived at the barrier", "isCorrect": false },
                   { "answerText": "If count < P then busy wait on a flag variable", "isCorrect": false }
                 ]
               },
+            
+            
                 {
                   "questionText": "Identify from the following which one is in the decreasing order of size?",
                   "week": "Week 12",
@@ -1771,7 +1762,9 @@ const questions = [
                   "week": "Week 12",
                   "multiple": false,
                   "answerOptions": [
-                    { "answerText": "6", "isCorrect": true }
+                    { "answerText": "6", "isCorrect": true },
+                    { "answerText": "8", "isCorrect": false },
+                    { "answerText": "10", "isCorrect": false }
                   ]
                 },
                 {
@@ -1779,6 +1772,9 @@ const questions = [
                   "week": "Week 12",
                   "multiple": false,
                   "answerOptions": [
+                    
+                    { "answerText": "8", "isCorrect": false },
+                    { "answerText": "10", "isCorrect": false },
                     { "answerText": "6", "isCorrect": true }
                   ]
                 },
