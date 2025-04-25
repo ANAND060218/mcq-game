@@ -1763,6 +1763,7 @@ const questions = [
     questions.map(q => (q.multiple ? [] : null))
   );
   const [showScore, setShowScore] = useState(false);
+  const [showQuestionNumbers, setShowQuestionNumbers] = useState(false); // New state for toggle
 
   const handleOptionChange = (index) => {
     const updated = [...answers];
@@ -1798,6 +1799,7 @@ const questions = [
 
   const handleQuestionSelect = (questionNumber) => {
     setCurrentQuestion(questionNumber - 1); // Convert to 0-based index
+    setShowQuestionNumbers(false); // Hide the numbers after selection
   };
 
   return (
@@ -1805,79 +1807,114 @@ const questions = [
       {!showScore ? (
         <div className="quiz-container">
           <div className="question-navigation">
-            <h3>
-              Question {currentQuestion + 1} / {questions.length}
-            </h3>
-            <div className="question-jump">
-              {questions.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleQuestionSelect(index + 1)}
-                  className={currentQuestion === index ? "active" : ""}
-                >
-                  {index + 1}
-                </button>
-              ))}
+            <div className="progress-indicator">
+              <span>Question {currentQuestion + 1} of {questions.length}</span>
+              <div className="progress-bar">
+                <div 
+                  className="progress-fill"
+                  style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                ></div>
+              </div>
             </div>
-          </div>
-
-          <div className="question-text">
-            {questions[currentQuestion].questionText
-              .split('\n')
-              .map((line, i) => (
-                <p key={i}>
-                  <strong>{line}</strong>
-                </p>
-              ))}
-
-            {questions[currentQuestion].img && (
-              <div className="question-image">
-                <img
-                  src={imgSrc(questions[currentQuestion].img)}
-                  alt="Question illustration"
-                  loading="lazy"
-                  style={{ maxWidth: '100%', maxHeight: '300px' }}
-                />
+            
+            <button 
+              onClick={() => setShowQuestionNumbers(!showQuestionNumbers)}
+              className="btn toggle-numbers-btn"
+            >
+              {showQuestionNumbers ? (
+                <><i className="icon hide-icon"></i> Hide Questions</>
+              ) : (
+                <><i className="icon show-icon"></i> Show Questions</>
+              )}
+            </button>
+            
+            {showQuestionNumbers && (
+              <div className="question-jump">
+                {questions.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleQuestionSelect(index + 1)}
+                    className={`btn question-btn ${currentQuestion === index ? "active" : ""} ${
+                      answers[index] !== null && (questions[index].multiple ? answers[index].length > 0 : true) 
+                        ? "answered" 
+                        : ""
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
               </div>
             )}
           </div>
 
-          <form>
-            {questions[currentQuestion].answerOptions.map((opt, idx) => (
-              <div key={idx}>
-                <label>
-                  <input
-                    type={
-                      questions[currentQuestion].multiple
-                        ? 'checkbox'
-                        : 'radio'
-                    }
-                    name="answer"
-                    value={idx}
-                    checked={
-                      questions[currentQuestion].multiple
-                        ? answers[currentQuestion].includes(idx)
-                        : answers[currentQuestion] === idx
-                    }
-                    onChange={() => handleOptionChange(idx)}
+          <div className="question-card">
+            <div className="question-text">
+              {questions[currentQuestion].questionText
+                .split('\n')
+                .map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+
+              {questions[currentQuestion].img && (
+                <div className="question-image">
+                  <img
+                    src={imgSrc(questions[currentQuestion].img)}
+                    alt="Question illustration"
+                    loading="lazy"
                   />
-                  {' '}{opt.answerText}
-                </label>
-              </div>
-            ))}
-          </form>
+                </div>
+              )}
+            </div>
+
+            <form className="options-form">
+              {questions[currentQuestion].answerOptions.map((opt, idx) => (
+                <div key={idx} className="option-item">
+                  <label className={`option-label ${
+                    questions[currentQuestion].multiple ? 'checkbox' : 'radio'
+                  }`}>
+                    <input
+                      type={questions[currentQuestion].multiple ? 'checkbox' : 'radio'}
+                      name="answer"
+                      value={idx}
+                      checked={
+                        questions[currentQuestion].multiple
+                          ? answers[currentQuestion].includes(idx)
+                          : answers[currentQuestion] === idx
+                      }
+                      onChange={() => handleOptionChange(idx)}
+                    />
+                    <span className="custom-control"></span>
+                    <span className="option-text">{opt.answerText}</span>
+                  </label>
+                </div>
+              ))}
+            </form>
+          </div>
 
           <div className="navigation-buttons">
-            <button onClick={() => setCurrentQuestion(q => q - 1)} disabled={currentQuestion === 0}>
-              Prev
+            <button 
+              onClick={() => setCurrentQuestion(q => q - 1)} 
+              disabled={currentQuestion === 0}
+              className="btn nav-btn prev-btn"
+            >
+              <i className="icon prev-icon"></i> Previous
             </button>
-            <button onClick={() => setCurrentQuestion(q => q + 1)} disabled={currentQuestion === questions.length - 1}>
-              Next
+            <button 
+              onClick={() => setCurrentQuestion(q => q + 1)} 
+              disabled={currentQuestion === questions.length - 1}
+              className="btn nav-btn next-btn"
+            >
+              Next <i className="icon next-icon"></i>
             </button>
-            <button onClick={() => setShowScore(true)}>Submit</button>
+            <button 
+              onClick={() => setShowScore(true)}
+              className="btn submit-btn"
+            >
+              Submit Quiz
+            </button>
           </div>
         </div>
-      ) : (
+      ) :  (
         <div className="score-container">
           <h2>Quiz Completed!</h2>
           <p>
