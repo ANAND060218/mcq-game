@@ -510,7 +510,11 @@ const questions = [
       "week": "Week 4",
       "multiple": false,
       "answerOptions": [
-        { "answerText": "Write serialization", "isCorrect": true }
+        { "answerText": "Write serialization", "isCorrect": true },
+        { "answerText": "Coherent view of memory", "isCorrect": true },
+        { "answerText": "Preserve Program Order", "isCorrect": true },
+        { "answerText": "Read Serialization", "isCorrect": false }
+
       ]
     },
     {
