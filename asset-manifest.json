@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mcq-game/static/css/main.ff62ff8a.css",
-    "main.js": "/mcq-game/static/js/main.0bfa0f70.js",
+    "main.css": "/mcq-game/static/css/main.f4b39f40.css",
+    "main.js": "/mcq-game/static/js/main.7dbecbdd.js",
     "static/js/453.6ed28962.chunk.js": "/mcq-game/static/js/453.6ed28962.chunk.js",
     "index.html": "/mcq-game/index.html",
-    "main.ff62ff8a.css.map": "/mcq-game/static/css/main.ff62ff8a.css.map",
-    "main.0bfa0f70.js.map": "/mcq-game/static/js/main.0bfa0f70.js.map",
+    "main.f4b39f40.css.map": "/mcq-game/static/css/main.f4b39f40.css.map",
+    "main.7dbecbdd.js.map": "/mcq-game/static/js/main.7dbecbdd.js.map",
     "453.6ed28962.chunk.js.map": "/mcq-game/static/js/453.6ed28962.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ff62ff8a.css",
-    "static/js/main.0bfa0f70.js"
+    "static/css/main.f4b39f40.css",
+    "static/js/main.7dbecbdd.js"
   ]
 }
