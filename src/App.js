@@ -1251,7 +1251,7 @@ const questions = [
             ]
           },
           {
-            "questionText": "Which of the following statements is/are true for SGI Origin protocol?",
+            "questionText": "Which of the following statements is/are true for SGI Origin protocol?\n\nS1: Write miss always results into a request to home node \n\nS2: Ensures serialization using Busy state",
             "week": "Week 9",
             "multiple": false,
             "answerOptions": [
@@ -1906,8 +1906,8 @@ const questions = [
     `${process.env.PUBLIC_URL}${path}`;
 
   const handleQuestionSelect = (questionNumber) => {
-    setCurrentQuestion(questionNumber - 1); // Convert to 0-based index
-    setShowQuestionNumbers(false); // Hide the numbers after selection
+    setCurrentQuestion(questionNumber - 1); 
+    setShowQuestionNumbers(false); 
   };
 
   return (
