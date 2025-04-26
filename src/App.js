@@ -1012,7 +1012,7 @@ const questions = [
         ]
       },
       {
-        "questionText": "In the context of the request table entries, which one of the following options is true for a request and a response in a snooping protocol?",
+        "questionText": "In the context of the request table entries, which one of the following options is true for a request and a response in a snooping protocol?\n\n S1: When a request comes, the request address is compared with the Address field \n\nS2: When a request comes, the request address is compared with the TAG field \n\nS3: When a response comes, the response is compared with the Address field\n\n S4: When a response comes, the response is compared with the TAG field",
         "week": "Week 7",
         "multiple": false,
         "answerOptions": [
