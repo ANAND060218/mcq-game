@@ -1119,6 +1119,7 @@ const questions = [
         ]
       },
       
+      
         {
           "questionText": "What is the main limitation of using a full bit vector for keeping sharers data in a system with many nodes?",
           "week": "Week 8",
@@ -1142,7 +1143,7 @@ const questions = [
           ]
         },
         {
-          "questionText": "In strict request-response protocol, the number of transactions on the critical path is:",
+          "questionText": "In strict request-response protocol, the number of transaction on the critical path is:",
           "week": "Week 8",
           "multiple": false,
           "answerOptions": [
@@ -1159,8 +1160,8 @@ const questions = [
           "answerOptions": [
             { "answerText": "S + 1", "isCorrect": false },
             { "answerText": "S", "isCorrect": false },
-            { "answerText": "2 × S", "isCorrect": false },
-            { "answerText": "2 × (S + 1)", "isCorrect": true }
+            { "answerText": "2 × S", "isCorrect": true },
+            { "answerText": "2 × (S + 1)", "isCorrect": false }
           ]
         },
         {
@@ -1218,6 +1219,58 @@ const questions = [
             { "answerText": "In the order of original request sent by the requestor.", "isCorrect": false }
           ]
         },
+        {
+          "questionText": "To guarantee write-atomicity, in an invalidation-based protocol, what happens when a processor performs a write to a location, and it is yet to receive invalidation acknowledgments from all sharers.",
+          "week": "Week 8",
+          "multiple": false,
+          "answerOptions": [
+            { "answerText": "The writing processor can immediately access the newly written value.", "isCorrect": false },
+            { "answerText": "The new value is not accessible to the writing processor until all invalidation acknowledgments are received.", "isCorrect": true },
+            { "answerText": "The writing processor can access the new value but must send updates to other processors.", "isCorrect": false },
+            { "answerText": "The writing processor can access the new value only if it receives acknowledgment from the home node.", "isCorrect": false }
+          ]
+        },
+        {
+          "questionText": "Which system handles potential deadlock by dynamically adapting to strict request-response protocol?",
+          "week": "Week 8",
+          "multiple": false,
+          "answerOptions": [
+            { "answerText": "DASH", "isCorrect": false },
+            { "answerText": "Origin 2000", "isCorrect": true }
+          ]
+        },
+        {
+          "questionText": "Consider the following statements and choose the correct option:\n\nS1: Livelock and starvation will not occur if buffers are FIFO\nS2: NACK is good to avoid livelock due to race conditions\nS3: If NACK is used to avoid deadlock, it can lead to livelock\nS4: If NACK is used to avoid livelock, it can lead to a deadlock\nS5: Deadlock occurs when multiple nodes try to write to same location at the same time",
+          "week": "Week 8",
+          "multiple": false,
+          "answerOptions": [
+            { "answerText": "S1 is true, S2 is false, S3 is true, S4 false, S5 false.", "isCorrect": false },
+            { "answerText": "S1 is true, S2 is true, S3 is true, S4 is false, S5 is false.", "isCorrect": true },
+            { "answerText": "S1 is true, S2 is false, S3 is true, S4 is true, S5 is false.", "isCorrect": false },
+            { "answerText": "S1 is false, S2 is true, S3 is false, S4 is false, S5 is true.", "isCorrect": false }
+          ]
+        },
+        {
+          "questionText": "Flat memory based directory incurs storage overhead. We use one bit per node and a full bit vector. Given that block size = 128 B and there are 128 nodes in the system, calculate the percentage overhead incurred by the directory storage.",
+          "week": "Week 8",
+          "multiple": false,
+          "answerOptions": [
+            { "answerText": "12.5", "isCorrect": true }
+          ]
+        },
+        {
+          "questionText": "Consider the statements for order of Serialisation in directory-based protocol:\n\nS1: For clean blocks, the order is determined by home node.\nS2: For dirty blocks, the order is determined by Dirty node.",
+          "week": "Week 8",
+          "multiple": false,
+          "answerOptions": [
+            { "answerText": "S1 and S2 are true.", "isCorrect": true },
+            { "answerText": "S1 is true, S2 is false.", "isCorrect": false },
+            { "answerText": "S1 is false, S2 is true.", "isCorrect": false },
+            { "answerText": "S1 and S2 are false.", "isCorrect": false }
+          ]
+        },
+      
+      
         
           {
             "questionText": "Which of the following is/are not true for SGI Origin 2000?",
