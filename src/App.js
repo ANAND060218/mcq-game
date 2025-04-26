@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 const questions = [
@@ -1865,14 +1865,13 @@ const questions = [
       
     
   
-];
-function App() {
+];function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState(
     questions.map(q => (q.multiple ? [] : null))
   );
   const [showScore, setShowScore] = useState(false);
-  const [showQuestionNumbers, setShowQuestionNumbers] = useState(false);
+  const [showQuestionNumbers, setShowQuestionNumbers] = useState(false); // New state for toggle
 
   const handleOptionChange = (index) => {
     const updated = [...answers];
@@ -1896,36 +1895,20 @@ function App() {
           .filter(i => i !== null)
           .sort()
           .toString();
-        return score + ([...sel].sort().toString() === correct ? 1 : 0);
+        return score + ( [...sel].sort().toString() === correct ? 1 : 0 );
       } else {
         return score + (sel !== null && q.answerOptions[sel].isCorrect ? 1 : 0);
       }
     }, 0);
   };
 
-  const imgSrc = (path) => `${process.env.PUBLIC_URL}${path}`;
+  const imgSrc = (path) =>
+    `${process.env.PUBLIC_URL}${path}`;
 
   const handleQuestionSelect = (questionNumber) => {
-    setCurrentQuestion(questionNumber - 1);
-    setShowQuestionNumbers(false);
+    setCurrentQuestion(questionNumber - 1); 
+    setShowQuestionNumbers(false); 
   };
-
-  // 🔥 Handle Enter Key
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        if (currentQuestion < questions.length - 1) {
-          setCurrentQuestion(q => q + 1);
-        } else if (currentQuestion === questions.length - 1 && !showScore) {
-          setShowScore(true);
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentQuestion, showScore]);
 
   return (
     <div className="app-container">
@@ -1935,14 +1918,14 @@ function App() {
             <div className="progress-indicator">
               <span>Question {currentQuestion + 1} of {questions.length}</span>
               <div className="progress-bar">
-                <div
+                <div 
                   className="progress-fill"
                   style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                 ></div>
               </div>
             </div>
-
-            <button
+            
+            <button 
               onClick={() => setShowQuestionNumbers(!showQuestionNumbers)}
               className="btn toggle-numbers-btn"
             >
@@ -1952,14 +1935,18 @@ function App() {
                 <><i className="icon show-icon"></i> Show Questions</>
               )}
             </button>
-
+            
             {showQuestionNumbers && (
               <div className="question-jump">
                 {questions.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => handleQuestionSelect(index + 1)}
-                    className={`btn question-btn ${currentQuestion === index ? "active" : ""} ${answers[index] !== null && (questions[index].multiple ? answers[index].length > 0 : true) ? "answered" : ""}`}
+                    className={`btn question-btn ${currentQuestion === index ? "active" : ""} ${
+                      answers[index] !== null && (questions[index].multiple ? answers[index].length > 0 : true) 
+                        ? "answered" 
+                        : ""
+                    }`}
                   >
                     {index + 1}
                   </button>
@@ -1970,14 +1957,15 @@ function App() {
 
           <div className="question-card">
             <div className="question-text">
-              <div className="question-week">
-                <h3>{questions[currentQuestion].week}</h3>
-              </div>
+            <div className="question-week">
+  <h3>{questions[currentQuestion].week}</h3>
+</div>
               {questions[currentQuestion].questionText
                 .split('\n')
                 .map((line, i) => (
                   <p key={i}>{line}</p>
                 ))}
+
               {questions[currentQuestion].img && (
                 <div className="question-image">
                   <img
@@ -1992,7 +1980,9 @@ function App() {
             <form className="options-form">
               {questions[currentQuestion].answerOptions.map((opt, idx) => (
                 <div key={idx} className="option-item">
-                  <label className={`option-label ${questions[currentQuestion].multiple ? 'checkbox' : 'radio'}`}>
+                  <label className={`option-label ${
+                    questions[currentQuestion].multiple ? 'checkbox' : 'radio'
+                  }`}>
                     <input
                       type={questions[currentQuestion].multiple ? 'checkbox' : 'radio'}
                       name="answer"
@@ -2013,21 +2003,21 @@ function App() {
           </div>
 
           <div className="navigation-buttons">
-            <button
-              onClick={() => setCurrentQuestion(q => q - 1)}
+            <button 
+              onClick={() => setCurrentQuestion(q => q - 1)} 
               disabled={currentQuestion === 0}
               className="btn nav-btn prev-btn"
             >
               <i className="icon prev-icon"></i> Previous
             </button>
-            <button
-              onClick={() => setCurrentQuestion(q => q + 1)}
+            <button 
+              onClick={() => setCurrentQuestion(q => q + 1)} 
               disabled={currentQuestion === questions.length - 1}
               className="btn nav-btn next-btn"
             >
               Next <i className="icon next-icon"></i>
             </button>
-            <button
+            <button 
               onClick={() => setShowScore(true)}
               className="btn submit-btn"
             >
@@ -2035,10 +2025,12 @@ function App() {
             </button>
           </div>
         </div>
-      ) : (
+      ) :  (
         <div className="score-container">
           <h2>Quiz Completed!</h2>
-          <p>Your Score: {calculateScore()} / {questions.length}</p>
+          <p>
+            Your Score: {calculateScore()} / {questions.length}
+          </p>
 
           {questions.map((q, idx) => (
             <div key={idx} className="review-question">
@@ -2048,6 +2040,7 @@ function App() {
                     <strong>{idx + 1}. {line}</strong>
                   </p>
                 ))}
+
                 {q.img && (
                   <div className="question-image">
                     <img
