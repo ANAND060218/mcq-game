@@ -1255,7 +1255,10 @@ const questions = [
           "week": "Week 8",
           "multiple": false,
           "answerOptions": [
-            { "answerText": "12.5", "isCorrect": true }
+            { "answerText": "12.5", "isCorrect": true },
+            { "answerText": "12.8", "isCorrect": false },
+            { "answerText": "13.8", "isCorrect": false }
+          
           ]
         },
         {
