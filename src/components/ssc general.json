@@ -1,0 +1,280 @@
+const questions = [
+  
+  
+    {
+      "questionText": "The term ‘Back-stick’ is used in which of the following games/sports?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Badminton", "isCorrect": false },
+        { "answerText": "Hockey", "isCorrect": true },
+        { "answerText": "Volleyball", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Which of the following festivals in Punjab is celebrated to commemorate the formation of the Khalsa Panth?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Lohri", "isCorrect": false },
+        { "answerText": "Hola Mohalla", "isCorrect": false },
+        { "answerText": "Teej", "isCorrect": false },
+        { "answerText": "Baisakhi", "isCorrect": true }
+      ]
+    },
+    {
+      "questionText": "What theme was decided to celebrate the second ‘International Day of Yoga’ in India?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Yoga for the achievement of the Sustainable Development Goals", "isCorrect": true },
+        { "answerText": "Yoga for Peace", "isCorrect": false },
+        { "answerText": "Yoga for Wellness", "isCorrect": false },
+        { "answerText": "Yoga for Heart", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Chemical formula of quick lime is",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "CaO", "isCorrect": true },
+        { "answerText": "CO2", "isCorrect": false },
+        { "answerText": "CaCO3", "isCorrect": false },
+        { "answerText": "Ca(OH)2", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "What is the unit of work done?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Watt", "isCorrect": false },
+        { "answerText": "Decibel", "isCorrect": false },
+        { "answerText": "Ampere", "isCorrect": false },
+        { "answerText": "Joule", "isCorrect": true }
+      ]
+    },
+    {
+      "questionText": "Which of the following sites do NOT have nuclear power plant?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Vijayawada", "isCorrect": true },
+        { "answerText": "Naraura", "isCorrect": false },
+        { "answerText": "Tarapur", "isCorrect": false },
+        { "answerText": "Rawat Bhata", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "The Ramakrishna Mission stressed the ideal of _______ through social service and selfless action.",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "bhakti", "isCorrect": false },
+        { "answerText": "education", "isCorrect": false },
+        { "answerText": "salvation", "isCorrect": true },
+        { "answerText": "God", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "International Non-Violence Day is observed on:",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "15 August", "isCorrect": false },
+        { "answerText": "31 October", "isCorrect": false },
+        { "answerText": "2 October", "isCorrect": true },
+        { "answerText": "14 November", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Which of the following Dynasties established the kingdom of Vijayanagara?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Sangama Dynasty", "isCorrect": true },
+        { "answerText": "Nagama Dynasty", "isCorrect": false },
+        { "answerText": "Soma Dynasty", "isCorrect": false },
+        { "answerText": "Tuluva Dynasty", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "When was ‘Vayudoot’ airline setup in India?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "1981", "isCorrect": true },
+        { "answerText": "1991", "isCorrect": false },
+        { "answerText": "1971", "isCorrect": false },
+        { "answerText": "1969", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Wearing away of landscape by different agents like water, wind and ice is called:",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Weathering", "isCorrect": false },
+        { "answerText": "Erosion", "isCorrect": true },
+        { "answerText": "Metamorphosis", "isCorrect": false },
+        { "answerText": "Sedimentation", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Who has been appointed as the new chairman of the Central Board of Direct Taxes in June 2022?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Nitin Gupta", "isCorrect": true },
+        { "answerText": "Nidhi Chibber", "isCorrect": false },
+        { "answerText": "Ashish Jha", "isCorrect": false },
+        { "answerText": "M Jagadesh Kumar", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Who among the following is known as ‘Sarod Samrat’ in Indian Classical Music?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Pandit Ravishankar Prasad", "isCorrect": false },
+        { "answerText": "Aamir Ali Khan", "isCorrect": false },
+        { "answerText": "Amjad Ali Khan", "isCorrect": true },
+        { "answerText": "Kishan Maharaj", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Which of the following is NOT one of the methods of national income estimation?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Banking method", "isCorrect": true },
+        { "answerText": "Expenditure method", "isCorrect": false },
+        { "answerText": "Product method", "isCorrect": false },
+        { "answerText": "Income method", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "The term ‘Parliament’ refers to the",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Rajya Sabha", "isCorrect": false },
+        { "answerText": "Lok Sabha", "isCorrect": false },
+        { "answerText": "State legislature", "isCorrect": false },
+        { "answerText": "National legislature", "isCorrect": true }
+      ]
+    },
+    {
+      "questionText": "Chief Minister of which state has inaugurated a project of the Women and Child Development department to provide milk and eggs to children at all anganwadis in the state?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Andhra Pradesh", "isCorrect": false },
+        { "answerText": "Kerala", "isCorrect": true },
+        { "answerText": "Karnataka", "isCorrect": false },
+        { "answerText": "Tamil Nadu", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "A 'Camel Protection and Development Policy' has been announced by the government of:",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Rajasthan", "isCorrect": true },
+        { "answerText": "Punjab", "isCorrect": false },
+        { "answerText": "Gujarat", "isCorrect": false },
+        { "answerText": "Ladakh", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Who among the following Presidents of India was also the deputy chairman of Planning Commission?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "V V Giri", "isCorrect": false },
+        { "answerText": "K R Narayanan", "isCorrect": false },
+        { "answerText": "Ramaswamy Venkataraman", "isCorrect": false },
+        { "answerText": "Pranab Mukherjee", "isCorrect": true }
+      ]
+    },
+    {
+      "questionText": "In Golgi apparatus, the maturing face is:",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "spherical", "isCorrect": false },
+        { "answerText": "convex", "isCorrect": true },
+        { "answerText": "bi-concave", "isCorrect": false },
+        { "answerText": "concave", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Raja Ram Mohan Roy founded a reform association known as Brahmo Sabha which was later known as:",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Dev Samaj", "isCorrect": false },
+        { "answerText": "Arya Samaj", "isCorrect": false },
+        { "answerText": "Brahmo School", "isCorrect": false },
+        { "answerText": "Brahmo Samaj", "isCorrect": true }
+      ]
+    },
+    {
+      "questionText": "_____ part of xylem tissue in plants stores food.",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Vessels", "isCorrect": false },
+        { "answerText": "Xylem fibres", "isCorrect": false },
+        { "answerText": "Xylem parenchyma", "isCorrect": true},
+        { "answerText": "Tracheids", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Who among the following composers won the Grammy in 2015 for his album ‘Winds of Samsara’ – a collaboration with South African flautist Wouter Kellerman?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Mano Murthy", "isCorrect": false },
+        { "answerText": "Raghu Dixit", "isCorrect": false },
+        { "answerText": "Subhashish Ghosh", "isCorrect": false },
+        { "answerText": "Ricky Kej", "isCorrect": true }
+      ]
+    },
+    {
+      "questionText": "In which of the following Indian states, Harappan cities have NOT been found?",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Uttarakhand", "isCorrect": true },
+        { "answerText": "Gujarat", "isCorrect": false },
+        { "answerText": "Rajasthan", "isCorrect": false },
+        { "answerText": "Haryana", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "Burning of coal is an example of:",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "decomposition reaction", "isCorrect": false },
+        { "answerText": "double displacement reaction", "isCorrect": false },
+        { "answerText": "combination reaction", "isCorrect": true },
+        { "answerText": "displacement reaction", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "The foremost right among rights to freedom is:",
+      "week": "2022",
+      "multiple": false,
+      "answerOptions": [
+        { "answerText": "Right to life and personal liberty", "isCorrect": true },
+        { "answerText": "Preventive detention", "isCorrect": false },
+        { "answerText": "Freedom to assemble", "isCorrect": false },
+        { "answerText": "Right to freedom of speech and expression", "isCorrect": false }
+      ]
+    }
+  
+  
+];
