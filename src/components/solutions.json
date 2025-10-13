@@ -1,0 +1,37 @@
+[
+  {
+    "qno": 4,
+    "week": "Week 11",
+    "ansdescrption": "The `-Pn` flag tells Nmap to completely skip the host discovery (ping scan) phase. It treats all specified target hosts as online and proceeds directly to the requested port scans."
+  },
+  {
+    "qno": 5,
+    "week": "Week 11",
+    "ansdescrption": "A TCP Connect scan (`-sT`) uses the operating system's `connect()` system call to establish a full connection, completing the entire three-way handshake (SYN, SYN-ACK, ACK). This makes it reliable but easily logged by firewalls."
+  },
+  {
+    "qno": 6,
+    "week": "Week 11",
+    "ansdescrption": "Promiscuous mode allows a network interface card (NIC) to capture all packets on the network segment it's connected to, not just the packets addressed to its own MAC address. This is essential for network monitoring."
+  },
+  {
+    "qno": 7,
+    "week": "Week 11",
+    "ansdescrption": "The `-O` flag in Nmap enables its powerful OS detection feature. Nmap sends a series of TCP and UDP probes to the target and analyzes the responses to create a fingerprint and identify the operating system."
+  },
+  {
+    "qno": 8,
+    "week": "Week 11",
+    "ansdescrption": "The `-sV` flag is for service and version detection. It probes open ports to determine the exact name (e.g., Apache) and version number (e.g., 2.4.52) of the application running on that port."
+  },
+  {
+    "qno": 9,
+    "week": "Week 11",
+    "ansdescrption": "The `--top-ports <number>` option instructs Nmap to scan only the most frequently found open ports. For example, `--top-ports 10` will scan the 10 most common ports like 80 (HTTP), 443 (HTTPS), 22 (SSH), etc."
+  },
+  {
+    "qno": 10,
+    "week": "Week 11",
+    "ansdescrption": "Wireshark's default and modern file format is `.pcapng` (PCAP Next Generation). It's more advanced than the older `.pcap` format and supports features like adding comments and capturing from multiple network interfaces in one file."
+  }
+]
