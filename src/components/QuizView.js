@@ -3,28 +3,27 @@ import { FaArrowLeft, FaArrowRight, FaHome, FaPaperPlane, FaLightbulb } from 're
 
 const QuizView = ({ questions, onComplete, onGoHome }) => {
   const [currentQIndex, setCurrentQIndex] = useState(0);
-  // This state holds answers for the entire quiz to support final submission
   const [answers, setAnswers] = useState(() =>
     questions.map(q => (q.isMultipleChoice ? [] : null))
   );
-  // This state tracks if the solution for the CURRENT question should be shown
   const [showSolution, setShowSolution] = useState(false);
 
   const question = questions[currentQIndex];
+  const isShortAnswer = question.answerOptions.length === 1;
 
-  const handleSelectAnswer = (optionText) => {
-    // Don't allow changing an answer after its solution has been viewed
+  // Handler for all answer selections
+  const handleAnswerChange = (value, isCheckbox = false) => {
     if (showSolution) return;
-
     const newAnswers = [...answers];
-    if (question.isMultipleChoice) {
+
+    if (isCheckbox) { // Handle checkbox (MSQ) logic
       const currentSelection = newAnswers[currentQIndex] || [];
-      const newSelection = currentSelection.includes(optionText)
-        ? currentSelection.filter(ans => ans !== optionText)
-        : [...currentSelection, optionText];
+      const newSelection = currentSelection.includes(value)
+        ? currentSelection.filter(ans => ans !== value)
+        : [...currentSelection, value];
       newAnswers[currentQIndex] = newSelection;
-    } else {
-      newAnswers[currentQIndex] = optionText;
+    } else { // Handle text input and single-choice buttons
+      newAnswers[currentQIndex] = value;
     }
     setAnswers(newAnswers);
   };
@@ -32,7 +31,6 @@ const QuizView = ({ questions, onComplete, onGoHome }) => {
   const handleNext = () => {
     if (currentQIndex < questions.length - 1) {
       setCurrentQIndex(currentQIndex + 1);
-      // Reset the solution view for the next question
       setShowSolution(false);
     }
   };
@@ -40,32 +38,89 @@ const QuizView = ({ questions, onComplete, onGoHome }) => {
   const handlePrev = () => {
     if (currentQIndex > 0) {
       setCurrentQIndex(currentQIndex - 1);
-      // Reset the solution view for the previous question
       setShowSolution(false);
     }
   };
 
+  // Gets styling for MCQ/MSQ options
   const getOptionClass = (optionText) => {
     const currentAnswer = answers[currentQIndex];
     const isSelected = Array.isArray(currentAnswer)
       ? (currentAnswer || []).includes(optionText)
       : currentAnswer === optionText;
 
-    // If solution is not being shown, only highlight the selected option
     if (!showSolution) {
       return isSelected ? 'selected' : '';
     }
     
-    // If solution IS being shown, apply correct/incorrect feedback
     const isCorrect = question.correctAnswersList.includes(optionText);
     if (isCorrect) return 'correct';
     if (isSelected && !isCorrect) return 'incorrect';
     return '';
   };
+  
+  // Gets styling for short answer input
+  const getShortAnswerClass = () => {
+      if (!showSolution) return '';
+      const userAnswer = (answers[currentQIndex] || '').trim().toLowerCase();
+      const correctAnswer = question.correctAnswersList[0].toLowerCase();
+      return userAnswer === correctAnswer ? 'correct' : 'incorrect';
+  }
 
   const isCurrentQuestionAnswered = Array.isArray(answers[currentQIndex])
     ? (answers[currentQIndex] || []).length > 0
-    : answers[currentQIndex] !== null;
+    : answers[currentQIndex] !== null && answers[currentQIndex] !== '';
+
+  const renderAnswers = () => {
+    if (isShortAnswer) {
+      return (
+        <div className="short-answer-container">
+          <input
+            type="text"
+            className={`short-answer-input ${getShortAnswerClass()}`}
+            value={answers[currentQIndex] || ''}
+            onChange={(e) => handleAnswerChange(e.target.value)}
+            placeholder="Type your answer here..."
+            disabled={showSolution}
+          />
+        </div>
+      );
+    }
+
+    if (question.isMultipleChoice) {
+      return (
+        <div className="options-grid">
+          {question.answerOptions.map((option, index) => (
+            <div key={index} className={`checkbox-option ${getOptionClass(option.answerText)}`}>
+              <input
+                type="checkbox"
+                id={`q${currentQIndex}-opt${index}`}
+                checked={(answers[currentQIndex] || []).includes(option.answerText)}
+                onChange={() => handleAnswerChange(option.answerText, true)}
+                disabled={showSolution}
+              />
+              <label htmlFor={`q${currentQIndex}-opt${index}`}>{option.answerText}</label>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    return (
+      <div className="options-grid">
+        {question.answerOptions.map((option, index) => (
+          <button
+            key={index}
+            className={`option-btn ${getOptionClass(option.answerText)}`}
+            onClick={() => handleAnswerChange(option.answerText)}
+            disabled={showSolution}
+          >
+            <span>{option.answerText}</span>
+          </button>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="card">
@@ -74,29 +129,16 @@ const QuizView = ({ questions, onComplete, onGoHome }) => {
         <div className="topic">{question.topic}</div>
       </div>
 
-      <div className="question-image-container">
-        <img src={question.questionText} alt={`Question ${currentQIndex + 1}`} className="question-image"/>
+      <div className="question-text-container">
+        <p className="question-text">{question.questionText}</p>
       </div>
       
-      <div className="options-grid">
-        {question.answerOptions.map((option, index) => (
-          <button
-            key={index}
-            className={`option-btn ${getOptionClass(option.answerText)}`}
-            onClick={() => handleSelectAnswer(option.answerText)}
-            disabled={showSolution} // Disable options after viewing solution
-          >
-            <span className="option-prefix">{option.answerText.charAt(0)}</span>
-            <span>{option.answerText.substring(2)}</span>
-          </button>
-        ))}
-      </div>
+      {renderAnswers()}
 
-      {/* Show "View Solution" button only if an answer is selected AND solution is not yet shown */}
       {isCurrentQuestionAnswered && !showSolution && (
         <div className="quiz-navigation" style={{ justifyContent: 'center', marginTop: '1rem' }}>
           <button onClick={() => setShowSolution(true)} className="btn btn-secondary">
-            <FaLightbulb /> If not sure,View Solution
+            <FaLightbulb /> If not sure, View Solution
           </button>
         </div>
       )}
@@ -116,14 +158,12 @@ const QuizView = ({ questions, onComplete, onGoHome }) => {
           <FaHome/> Home
         </button>
 
-        {/* Show "Next" button on all but the last question */}
         {currentQIndex < questions.length - 1 && (
           <button onClick={handleNext} className="btn btn-primary">
             Next <FaArrowRight />
           </button>
         )}
 
-        {/* Show "Submit Quiz" button ONLY on the last question */}
         {currentQIndex === questions.length - 1 && (
           <button onClick={() => onComplete(answers)} className="btn btn-primary">
             Submit Quiz <FaPaperPlane />
@@ -135,3 +175,4 @@ const QuizView = ({ questions, onComplete, onGoHome }) => {
 };
 
 export default QuizView;
+

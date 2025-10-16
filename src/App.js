@@ -3,7 +3,7 @@ import './App.css';
 import { auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import allQuestionsData from './components/questions.json';
-import allSolutionsData from './components/solutions.json';
+// The separate solutions.json file is no longer needed.
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
@@ -13,14 +13,27 @@ import ScoreCard from './components/ScoreCard';
 import ReviewView from './components/ReviewView';
 import FullScoreCard from './components/FullScoreCard';
 
-const solutionsMap = new Map(allSolutionsData.map(sol => [sol.qno, sol.ansdescrption]));
-
+// The data processing logic is now simplified.
+// It maps the description directly from the question object itself.
 const processedQuestions = allQuestionsData.map(question => {
+  // Determine the list of correct answers from the options.
   const correctAnswersList = question.answerOptions
     .filter(opt => opt.isCorrect)
     .map(opt => opt.answerText);
-  return { ...question, isMultipleChoice: correctAnswersList.length > 1, correctAnswersList, solution: solutionsMap.get(question.question_number) || 'No solution available.' };
+  
+  // Return a processed question object.
+  // - isMultipleChoice helps determine if multiple selections are allowed.
+  // - correctAnswersList is used for scoring.
+  // - The 'solution' is now directly mapped from 'ansdescrption'.
+  return { 
+    ...question, 
+    isMultipleChoice: correctAnswersList.length > 1, 
+    correctAnswersList, 
+    // Use the 'ansdescrption' field from the new JSON as the solution.
+    solution: question.ansdescrption || 'No solution available.' 
+  };
 });
+
 
 function App() {
   const [theme, setTheme] = useState('light');

@@ -1,27 +1,27 @@
 import React from 'react';
 import { FaHome } from 'react-icons/fa';
 
-const ReviewView = ({ questions, userAnswers, onGoHome, user }) => { // Added user prop
-  // Calculate the final score
+const ReviewView = ({ questions, userAnswers, onGoHome, user }) => {
   const score = questions.reduce((acc, question, index) => {
     const userAnswer = userAnswers[index];
     const { correctAnswersList, isMultipleChoice } = question;
     let isCorrect = false;
 
-    if (!userAnswer) return acc; // No answer given
+    if (userAnswer === null || userAnswer === undefined) return acc;
 
-    if (isMultipleChoice) {
+    if (question.answerOptions.length === 1) {
+      isCorrect = (userAnswer || '').trim().toLowerCase() === correctAnswersList[0].toLowerCase();
+    } else if (isMultipleChoice) {
       const selectedSet = new Set(userAnswer);
       const correctSet = new Set(correctAnswersList);
-      isCorrect = selectedSet.size === correctSet.size && 
-                  [...selectedSet].every(ans => correctSet.has(ans));
+      isCorrect = selectedSet.size === correctSet.size &&
+        [...selectedSet].every(ans => correctSet.has(ans));
     } else {
       isCorrect = userAnswer === correctAnswersList[0];
     }
     return isCorrect ? acc + 1 : acc;
   }, 0);
 
-  // Function to style each option during review
   const getOptionClass = (optionText, question, userAnswer) => {
     const isSelected = userAnswer === optionText || (Array.isArray(userAnswer) && userAnswer.includes(optionText));
     const isCorrect = question.correctAnswersList.includes(optionText);
@@ -30,11 +30,58 @@ const ReviewView = ({ questions, userAnswers, onGoHome, user }) => { // Added us
     if (isSelected && !isCorrect) return 'incorrect';
     return '';
   };
+  
+  const renderAnswers = (question, index) => {
+    const userAnswer = userAnswers[index];
+    const isShortAnswer = question.answerOptions.length === 1;
+
+    if (isShortAnswer) {
+      const isCorrect = (userAnswer || '').trim().toLowerCase() === question.correctAnswersList[0].toLowerCase();
+      return (
+        <div className="short-answer-container">
+          <input
+            type="text"
+            className={`short-answer-input ${isCorrect ? 'correct' : 'incorrect'}`}
+            value={userAnswer || ''}
+            disabled
+          />
+        </div>
+      );
+    }
+
+    if (question.isMultipleChoice) {
+      return (
+        <div className="options-grid">
+          {question.answerOptions.map((option, optIndex) => (
+            <div key={optIndex} className={`checkbox-option disabled ${getOptionClass(option.answerText, question, userAnswer)}`}>
+              <input
+                type="checkbox"
+                id={`rev${index}-opt${optIndex}`}
+                checked={(userAnswer || []).includes(option.answerText)}
+                disabled
+              />
+              <label htmlFor={`rev${index}-opt${optIndex}`}>{option.answerText}</label>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    return (
+       <div className="options-grid">
+        {question.answerOptions.map((option, optIndex) => (
+          <button key={optIndex} className={`option-btn disabled ${getOptionClass(option.answerText, question, userAnswer)}`}>
+            <span>{option.answerText}</span>
+          </button>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="card review-container">
       <div className="score-summary">
-        <h2>Quiz Review for {user.displayName}</h2> {/* Added personalized greeting */}
+        <h2>Quiz Review for {user.displayName}</h2>
         <p>You scored <strong>{score}</strong> out of <strong>{questions.length}</strong></p>
       </div>
 
@@ -44,17 +91,13 @@ const ReviewView = ({ questions, userAnswers, onGoHome, user }) => { // Added us
             <strong>Question {index + 1}</strong>
             <span className="topic">{question.topic}</span>
           </div>
-          <div className="question-image-container"> {/* This container will get updated styles */}
-            <img src={question.questionText} alt={`Question ${index + 1}`} className="question-image"/>
+
+          <div className="question-text-container">
+            <p className="question-text">{question.questionText}</p>
           </div>
-          <div className="options-grid">
-            {question.answerOptions.map((option, optIndex) => (
-              <button key={optIndex} className={`option-btn disabled ${getOptionClass(option.answerText, question, userAnswers[index])}`}>
-                <span className="option-prefix">{option.answerText.charAt(0)}</span>
-                <span>{option.answerText.substring(2)}</span>
-              </button>
-            ))}
-          </div>
+          
+          {renderAnswers(question, index)}
+
           <div className="solution-box">
             <h4>Explanation:</h4>
             <p>{question.solution}</p>
@@ -71,3 +114,4 @@ const ReviewView = ({ questions, userAnswers, onGoHome, user }) => { // Added us
 };
 
 export default ReviewView;
+
