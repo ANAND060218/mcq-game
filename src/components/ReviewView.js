@@ -10,7 +10,8 @@ const ReviewView = ({ questions, userAnswers, onGoHome, user }) => {
     if (userAnswer === null || userAnswer === undefined) return acc;
 
     if (question.answerOptions.length === 1) {
-      isCorrect = (userAnswer || '').trim().toLowerCase() === correctAnswersList[0].toLowerCase();
+      // FIX: Ensure userAnswer is treated as a string before .toLowerCase()
+      isCorrect = String(userAnswer || '').trim().toLowerCase() === correctAnswersList[0].toLowerCase();
     } else if (isMultipleChoice) {
       const selectedSet = new Set(userAnswer);
       const correctSet = new Set(correctAnswersList);
@@ -36,7 +37,8 @@ const ReviewView = ({ questions, userAnswers, onGoHome, user }) => {
     const isShortAnswer = question.answerOptions.length === 1;
 
     if (isShortAnswer) {
-      const isCorrect = (userAnswer || '').trim().toLowerCase() === question.correctAnswersList[0].toLowerCase();
+      // FIX: Ensure userAnswer is treated as a string before .toLowerCase()
+      const isCorrect = String(userAnswer || '').trim().toLowerCase() === question.correctAnswersList[0].toLowerCase();
       return (
         <div className="short-answer-container">
           <input
@@ -114,4 +116,3 @@ const ReviewView = ({ questions, userAnswers, onGoHome, user }) => {
 };
 
 export default ReviewView;
-

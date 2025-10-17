@@ -3,7 +3,8 @@ import './App.css';
 import { auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import allQuestionsData from './components/questions.json';
-// The separate solutions.json file is no longer needed.
+
+// Import all necessary components
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
@@ -12,9 +13,9 @@ import TestView from './components/TestView';
 import ScoreCard from './components/ScoreCard';
 import ReviewView from './components/ReviewView';
 import FullScoreCard from './components/FullScoreCard';
+import MatrixRain from './components/MatrixRain'; // The new background animation component
 
-// The data processing logic is now simplified.
-// It maps the description directly from the question object itself.
+// The data processing logic maps the description directly from the question object.
 const processedQuestions = allQuestionsData.map(question => {
   // Determine the list of correct answers from the options.
   const correctAnswersList = question.answerOptions
@@ -22,21 +23,17 @@ const processedQuestions = allQuestionsData.map(question => {
     .map(opt => opt.answerText);
   
   // Return a processed question object.
-  // - isMultipleChoice helps determine if multiple selections are allowed.
-  // - correctAnswersList is used for scoring.
-  // - The 'solution' is now directly mapped from 'ansdescrption'.
   return { 
     ...question, 
     isMultipleChoice: correctAnswersList.length > 1, 
     correctAnswersList, 
-    // Use the 'ansdescrption' field from the new JSON as the solution.
+    // Use the 'ansdescrption' field from the JSON as the solution.
     solution: question.ansdescrption || 'No solution available.' 
   };
 });
 
-
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const [view, setView] = useState('home');
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState([]);
@@ -105,7 +102,7 @@ function App() {
   };
 
   const renderContent = () => {
-    // If the view is not 'home' and the user is logged in, show the active component.
+    // If the user is logged in and not on the home screen, show the active component.
     if (user && view !== 'home') {
         switch (view) {
             case 'quiz': return <QuizView questions={questions} onComplete={handleQuizSubmit} onGoHome={handleGoHome} />;
@@ -117,7 +114,7 @@ function App() {
         }
     }
     
-    // Default case: always render HomePage if view is 'home' or if user is logged out.
+    // Default case: render HomePage if view is 'home' or if the user is logged out.
     return (
         <HomePage 
             user={user} 
@@ -131,6 +128,9 @@ function App() {
 
   return (
     <div className="app-wrapper">
+      {/* Conditionally render the MatrixRain background only when a user is logged in */}
+      {user && <MatrixRain />}
+      
       <Header user={user} theme={theme} toggleTheme={toggleTheme} />
       <main className="app-content">
         {renderContent()}
